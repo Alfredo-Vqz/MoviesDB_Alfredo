@@ -6,6 +6,7 @@ import PublicRouter from './PublicRouter';
 import { ROUTES } from './constants';
 import { element } from 'prop-types';
 import { Upcoming } from '../pages/Upcoming';
+import { Favorites } from '../pages/Favorites';
 
 const routes: RouteObject[] = [
     {
@@ -15,7 +16,8 @@ const routes: RouteObject[] = [
             { path: ROUTES.POPULAR, element: <Popular />},
             { path: ROUTES.TOPRATED, element: <TopRated />},
             { path: ROUTES.UPCOMING, element: <Upcoming />},
-            { path: `${ROUTES.SHOW}:id`, element: <Show />}
+            { path: `${ROUTES.SHOW}:id`, element: <Show />},
+            { path: ROUTES.FAVORITES, element: <Favorites />},
         ]
     },
     {

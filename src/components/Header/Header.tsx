@@ -23,6 +23,9 @@ const Header: React.FC = () => {
                     <li>
                         <Link className="duration-300 font-serif block py-2 px-3 hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-500 md:p-0" to={ROUTES.UPCOMING}>Upcoming</Link>
                     </li>
+                    <li>
+                        <Link className="duration-300 font-serif block py-2 px-3 hover:bg-gray-700 md:hover:bg-transparent md:border-0 md:hover:text-blue-500 md:p-0" to={ROUTES.FAVORITES}>Favorites</Link>
+                    </li>
                 </ul>
             </div>
         </nav>
