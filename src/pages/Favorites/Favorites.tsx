@@ -38,7 +38,7 @@ const Favorites = () => {
                 {shows.length === 0 && !loading && <div className="font-bold text-white opacity-80 font-serif text-3xl mt-10 mr-auto ml-80"> It looks like you haven't added any favorite movies yet.</div>}
                 {loading && <div>Loading...</div>}
                 {shows.length > 0 && (
-                    <div className='grid grid-cols-1 gap-x-4 gap-y-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 mt-8'>
+                    <div className='grid gap-4 justify-items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 mt-8'>
                         {shows.map((movie: IMovieDetail) => (
                             <MovieCard
                                 key={movie.id}
