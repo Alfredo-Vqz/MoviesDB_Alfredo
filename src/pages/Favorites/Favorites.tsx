@@ -23,8 +23,8 @@ const Favorites = () => {
                 })
             );
             setShows(newShows);
-            setLoading(false);
         }
+        setLoading(false);
     };
 
     useEffect(() => {
