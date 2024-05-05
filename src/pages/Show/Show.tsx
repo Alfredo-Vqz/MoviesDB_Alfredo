@@ -15,10 +15,11 @@ const Show = () => {
     const [movie, setMovie] = useState<IMovieDetail>();   
     const [recommendations, setRecommendations] = useState<any[]>([]); 
     const [loading, setLoading] = useState<boolean>(false);
+    const [isFavorite, setIsFavorite] = useState<boolean>(false);
+    const [favorites, setFavorites] = useState<string>("");
 
-    const getDetailsMovie = async () => {
-        const movieId = id ? parseInt(id) : undefined;
-        if (movieId) {
+    const getDetailsMovie = async (movieId: number | undefined) => {
+        if (movieId !== undefined) { 
             await getDetails(movieId) 
                 .then((res) => {
                     if (res && res.data) {
@@ -32,10 +33,9 @@ const Show = () => {
             setLoading(false);
         }
     }
-
-    const getMovieRecommendations = async () => {
-        const movieId = id ? parseInt(id) : undefined;
-        if (movieId) {
+    
+    const getMovieRecommendations = async (movieId: number | undefined) => {
+        if (movieId !== undefined) { 
             const res = await getRecommendations(movieId);
             if (res && res.data && res.data.results) {
                 setRecommendations(res.data.results);
@@ -45,18 +45,22 @@ const Show = () => {
 
     useEffect(() => {
         setLoading(true);
-        getDetailsMovie();
-        getMovieRecommendations();
-    }, []);
+        const movieId = id ? parseInt(id) : -1; 
+        getDetailsMovie(movieId);
+        getMovieRecommendations(movieId);
 
-    //funcion para regrear una pagina
+        const favs = localStorage.getItem('favorites') || "";
+        setFavorites(favs);
+        if( favs.includes(String(movieId))){
+            setIsFavorite(true);
+        } else {
+            setIsFavorite(false);
+        }
+    }, [id]);
+    
     const goBack = () => {
         navigate(-1);
     }
-
-    // todo para el boton de agregar y quitar de favoritos
-    const [isFavorite, setIsFavorite] = useState<boolean>(false);
-    const [favorites, setFavorites] = useState<string>("");
 
     const addFavorite = () => {
         const favs = favorites.length > 0 ? JSON.parse(favorites) : [];
@@ -68,20 +72,13 @@ const Show = () => {
 
     const removeFavorite = () => {
         const favs = favorites.length > 0 ? JSON.parse(favorites) : [];
-        let newFavorites = [...favs, id];
+        let newFavorites = [...favs];
         newFavorites = newFavorites.filter((e) => e !== id);
         setFavorites(JSON.stringify(newFavorites));
         setIsFavorite(false);
         localStorage.setItem("favorites", JSON.stringify(newFavorites));
     }
 
-    useEffect(() => {
-        const favs = localStorage.getItem('favorites') || "";
-        setFavorites(favs);
-        if( favs.includes(String(id))){
-            setIsFavorite(true);
-        }
-    }, [])
 
     return (
 <div className='bg-gray-800 min-h-screen bg-cover'>
@@ -123,7 +120,7 @@ const Show = () => {
         </div>
     </div>
     <div className="movie-section px-6 py-2">
-        <div className="font-bold text-white font-serif text-3xl mb-4 ml-4">Upcoming</div>
+        <div className="font-bold text-white font-serif text-3xl mb-4 ml-4">Recommendations</div>
         <div className="slider-container flex overflow-x-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-800">
             <div className="flex ml-5 mt-5">
                 {recommendations.map((movie) => (
@@ -140,7 +137,6 @@ const Show = () => {
         </div>
     </div>
 </div>
-
     );
 };
 
