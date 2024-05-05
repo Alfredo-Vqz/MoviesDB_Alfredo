@@ -31,7 +31,7 @@ const TopRated: React.FC = () => {
             <div className='flex justify-center'>
                 {loading && <div> Loading... </div>}
                 {errorMovies && <div> Error... </div>}
-                <div className='grid grid-cols-2 gap-x-4 gap-y-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 mt-8'>
+                <div className='grid grid-cols-1 gap-x-4 gap-y-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 mt-8'>
                     {movies.map((movie, index) => (
                         <MovieCard
                             key={movie.id}
