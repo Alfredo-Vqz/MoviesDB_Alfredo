@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { IMovieDetail, getDetails } from "../../services";
 import { IMAGE_SOURCE } from "../../constants/moviesMock";
-import { FaHeart, FaHeartBroken, FaRegArrowAltCircleLeft } from 'react-icons/fa';
+import { FaHeart, FaRegHeart, FaRegArrowAltCircleLeft } from 'react-icons/fa';
 import { getRecommendations } from "../../services"; 
 import { MovieCard } from "../../components/MovieCard";
 
@@ -101,9 +101,9 @@ const Show = () => {
                     </h2>
                     <div className="flex items-center mb-4">
                         {isFavorite ? (
-                            <button className="bg-red-500 hover:bg-red-700 text-white  py-3 px-3 rounded-full" onClick={removeFavorite}> <FaHeartBroken/> </button>
+                            <button className="bg-green-700 hover:bg-green-800 text-white  py-3 px-3 rounded-full" onClick={removeFavorite}> <FaHeart/> </button>
                         ) : (
-                            <button className="bg-green-500 hover:bg-green-700 text-white  py-3 px-3 rounded-full" onClick={addFavorite}> <FaHeart/> </button>
+                            <button className="bg-green-500 hover:bg-green-600 text-white  py-3 px-3 rounded-full" onClick={addFavorite}> <FaRegHeart/> </button>
                         )}
                         <div className="ml-5 flex flex-col">
                             <div className="bg-gray-500 h-2 w-32 rounded-full mb-1">
